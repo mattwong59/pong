@@ -37,13 +37,21 @@ function callback(millis) {
         update((millis - lastTime) / 1000);
     }
     lastTime = millis;
-    requestAnimationFrame(callback);                                          //animation function
+    requestAnimationFrame(callback);                                        //animation function
 }
 
 
 function update(dt) {                                                       //dt = deltatime
     ball.pos.x += ball.vel.x * dt;                                          //the movement of the ball is relative to the time difference of the update method
     ball.pos.y += ball.vel.y * dt;
+
+    if(ball.pos.x < 0 || ball.pos.x > canvas.width) {                               //handles bouncing of canvas edges
+        ball.vel.x = -ball.vel.x;
+    }                                 
+    
+    if(ball.pos.y < 0 || ball.pos.y > canvas.height) {
+        ball.vel.y = -ball.vel.y;
+    }                                 
 
     context.fillStyle = '#000';
     context.fillRect(0, 0, canvas.width, canvas.height);                    //draws the game board
