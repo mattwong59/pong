@@ -10,6 +10,22 @@ class Rect {
         this.pos = new Vec;
         this.size = new Vec(w, h);
     }
+
+    get left() {
+        return this.pos.x - this.size.x / 2;
+    }
+
+    get right() {
+        return this.pos.x + this.size.x / 2;
+    }
+
+    get top() {
+        return this.pos.y - this.size.y / 2;
+    }
+
+    get bottom() {
+        return this.pos.y + this.size.y / 2;
+    }    
 }
 
 class Ball extends Rect {
@@ -28,8 +44,8 @@ ball.pos.x = 100;
 ball.pos.y = 50;
 
 
-ball.vel.x = 100;
-ball.vel.y = 100;
+ball.vel.x = 200;
+ball.vel.y = 200;
 
 let lastTime;
 function callback(millis) {                                             
@@ -45,11 +61,11 @@ function update(dt) {                                                       //dt
     ball.pos.x += ball.vel.x * dt;                                          //the movement of the ball is relative to the time difference of the update method
     ball.pos.y += ball.vel.y * dt;
 
-    if(ball.pos.x < 0 || ball.pos.x > canvas.width) {                               //handles bouncing of canvas edges
+    if(ball.left < 0 || ball.right > canvas.width) {                               //handles bouncing of canvas edges
         ball.vel.x = -ball.vel.x;
     }                                 
     
-    if(ball.pos.y < 0 || ball.pos.y > canvas.height) {
+    if(ball.top < 0 || ball.bottom > canvas.height) {
         ball.vel.y = -ball.vel.y;
     }                                 
 
