@@ -31,6 +31,13 @@ class Ball extends Rect {
     }
 }
 
+class Player extends Rect {
+    constructor(){
+        super(40, 200);
+        this.score = 0;    
+    }
+}
+
 class Pong {
     constructor(canvas) {
         this._canvas = canvas;
@@ -42,6 +49,11 @@ class Pong {
 
         this.ball.vel.x = 200;
         this.ball.vel.y = 200;
+
+        this.players = [
+            new Player,
+            new Player
+        ]
 
         let lastTime;
         const callback = (millis) => {       
@@ -60,7 +72,8 @@ class Pong {
         this._canvas.width, this._canvas.height);       //draws the game board
     
         this.drawRect(this.ball);
-
+        
+        this.players.forEach(player => this.drawRect(player));
     }
 
     drawRect(rect) {
