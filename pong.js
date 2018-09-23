@@ -54,6 +54,15 @@ class Pong {
         callback();
     }
 
+    draw() {
+        this._context.fillStyle = '#000';
+        this._context.fillRect(0, 0, 
+        this._canvas.width, this._canvas.height);       //draws the game board
+    
+        this.drawRect(this.ball);
+
+    }
+
     drawRect(rect) {
         this._context.fillStyle = '#FFF';
         this._context.fillRect(rect.pos.x, rect.pos.y, 
@@ -70,14 +79,8 @@ class Pong {
         
         if(this.ball.top < 0 || this.ball.bottom > this._canvas.height) {
             this.ball.vel.y = -this.ball.vel.y;
-        }                                 
-    
-        this._context.fillStyle = '#000';
-        this._context.fillRect(0, 0, 
-        this._canvas.width, this._canvas.height);       //draws the game board
-    
-        this.drawRect(this.ball);
-    
+        }                                     
+        this.draw();
     }
 }
 
