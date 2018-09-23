@@ -10,19 +10,15 @@ class Rect {
         this.pos = new Vec;
         this.size = new Vec(w, h);
     }
-
     get left() {
         return this.pos.x - this.size.x / 2;
     }
-
     get right() {
         return this.pos.x + this.size.x / 2;
     }
-
     get top() {
         return this.pos.y - this.size.y / 2;
     }
-
     get bottom() {
         return this.pos.y + this.size.y / 2;
     }    
@@ -33,48 +29,53 @@ class Ball extends Rect {
         super(20, 20);
         this.vel = new Vec
     }
+}
 
+class Pong {
+    constructor(canvas) {
+        this._canvas = canvas;
+        this._context = canvas.getContext('2d');
+
+        this.ball = new Ball;
+        this.ball.pos.x = 100;
+        this.ball.pos.y = 50;
+
+        this.ball.vel.x = 200;
+        this.ball.vel.y = 200;
+
+        let lastTime;
+        const callback = (millis) => {       
+            if(lastTime) {
+                this.update((millis - lastTime) / 1000);
+            }
+            lastTime = millis;
+            requestAnimationFrame(callback);    //animation function
+        };
+        callback();
+    }
+
+    update(dt) {    //dt = deltatime
+        this.ball.pos.x += this.ball.vel.x * dt;      //the movement of the ball is relative to the time difference of the update method
+        this.ball.pos.y += this.ball.vel.y * dt;
+    
+        if(this.ball.left < 0 || this.ball.right > this._canvas.width) {      //handles bouncing of canvas edges
+            this.ball.vel.x = -this.ball.vel.x;
+        }                                 
+        
+        if(this.ball.top < 0 || this.ball.bottom > this._canvas.height) {
+            this.ball.vel.y = -this.ball.vel.y;
+        }                                 
+    
+        this._context.fillStyle = '#000';
+        this._context.fillRect(0, 0, 
+        this._canvas.width, this._canvas.height);       //draws the game board
+    
+        this._context.fillStyle = '#FFF';
+        this._context.fillRect(this.ball.pos.x, this.ball.pos.y, 
+                               this.ball.size.x, this.ball.size.y);     //draws the ball
+    
+    }
 }
 
 const canvas = document.getElementById('pong');
-const context = canvas.getContext('2d');
-const ball = new Ball;
-console.log(ball);
-ball.pos.x = 100;
-ball.pos.y = 50;
-
-
-ball.vel.x = 200;
-ball.vel.y = 200;
-
-let lastTime;
-function callback(millis) {                                             
-    if(lastTime) {
-        update((millis - lastTime) / 1000);
-    }
-    lastTime = millis;
-    requestAnimationFrame(callback);                                        //animation function
-}
-
-
-function update(dt) {                                                       //dt = deltatime
-    ball.pos.x += ball.vel.x * dt;                                          //the movement of the ball is relative to the time difference of the update method
-    ball.pos.y += ball.vel.y * dt;
-
-    if(ball.left < 0 || ball.right > canvas.width) {                               //handles bouncing of canvas edges
-        ball.vel.x = -ball.vel.x;
-    }                                 
-    
-    if(ball.top < 0 || ball.bottom > canvas.height) {
-        ball.vel.y = -ball.vel.y;
-    }                                 
-
-    context.fillStyle = '#000';
-    context.fillRect(0, 0, canvas.width, canvas.height);                    //draws the game board
-
-    context.fillStyle = '#FFF';
-    context.fillRect(ball.pos.x, ball.pos.y, ball.size.x, ball.size.y);     //draws the ball
-
-}
-
-callback();
+const pong = new Pong(canvas);
