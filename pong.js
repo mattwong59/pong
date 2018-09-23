@@ -55,6 +55,13 @@ class Pong {
             new Player
         ]
 
+        this.players[0].pos.x = 40;
+        this.players[1].pos.x = this._canvas.width - 40;
+
+        this.players.forEach(player => {
+            player.pos.y = this._canvas.height / 2;
+        })
+
         let lastTime;
         const callback = (millis) => {       
             if(lastTime) {
@@ -68,7 +75,7 @@ class Pong {
 
     draw() {
         this._context.fillStyle = '#000';
-        this._context.fillRect(0, 0, 
+        this._context.fillRect(0, 0,        
         this._canvas.width, this._canvas.height);       //draws the game board
     
         this.drawRect(this.ball);
@@ -78,7 +85,7 @@ class Pong {
 
     drawRect(rect) {
         this._context.fillStyle = '#FFF';
-        this._context.fillRect(rect.pos.x, rect.pos.y, 
+        this._context.fillRect(rect.left, rect.top, 
                                rect.size.x, rect.size.y);     //draws the ball
     }
 
