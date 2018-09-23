@@ -54,6 +54,12 @@ class Pong {
         callback();
     }
 
+    drawRect(rect) {
+        this._context.fillStyle = '#FFF';
+        this._context.fillRect(rect.pos.x, rect.pos.y, 
+                               rect.size.x, rect.size.y);     //draws the ball
+    }
+
     update(dt) {    //dt = deltatime
         this.ball.pos.x += this.ball.vel.x * dt;      //the movement of the ball is relative to the time difference of the update method
         this.ball.pos.y += this.ball.vel.y * dt;
@@ -70,9 +76,7 @@ class Pong {
         this._context.fillRect(0, 0, 
         this._canvas.width, this._canvas.height);       //draws the game board
     
-        this._context.fillStyle = '#FFF';
-        this._context.fillRect(this.ball.pos.x, this.ball.pos.y, 
-                               this.ball.size.x, this.ball.size.y);     //draws the ball
+        this.drawRect(this.ball);
     
     }
 }
