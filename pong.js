@@ -101,6 +101,8 @@ class Pong {
         this.ball.pos.y += this.ball.vel.y * dt;
     
         if(this.ball.left < 0 || this.ball.right > this._canvas.width) {      //handles bouncing of canvas edges
+            const playerId = this.ball.vel.x < 0 | 0;       // | 0 converts boolean statement in front of it to an integer
+            console.log(playerId);
             this.ball.vel.x = -this.ball.vel.x;
         }                                 
         
