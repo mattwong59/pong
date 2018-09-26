@@ -143,11 +143,11 @@ class Pong {
             const chars = player.score.toString().split('');
             const offset = align * 
                            (index + 1) - 
-                           (CHAR_W * chars.length / 2) * 
+                           (CHAR_W * chars.length / 2) + 
                            this.CHAR_PIXEL / 2;
             chars.forEach((char, pos) => {
-                this._context.drawImage(this.CHARS[char | 0],
-                                        offset + pos * CHAR_W, 20);
+                this._context.drawImage(this.CHARS[char | 0],       
+                                        offset + pos * CHAR_W, 30);
             });
         });
     }
