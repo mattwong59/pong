@@ -34,14 +34,14 @@ class Rect {
 
 class Ball extends Rect {
     constructor() {
-        super(20, 20);
+        super(10, 10);
         this.vel = new Vec
     }
 }
 
 class Player extends Rect {
     constructor(){
-        super(40, 200);
+        super(20, 100);
         this.score = 0;    
     }
 }
@@ -75,7 +75,7 @@ class Pong {
         };
         callback();
 
-        this.CHAR_PIXEL = 20;
+        this.CHAR_PIXEL = 10;
         this.CHARS = [
             '111101101101111', 
             '010010010010010',
@@ -195,7 +195,8 @@ const canvas = document.getElementById('pong');
 const pong = new Pong(canvas);
 
 canvas.addEventListener("mousemove", event => {
-    pong.players[0].pos.y = event.offsetY;
+    const scale = event.offsetY / event.target.getBoundingClientRect().height;
+    pong.players[0].pos.y = canvas.height * scale;    
 });
 
 canvas.addEventListener("click", event => {

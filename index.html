@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pong</title>
+    <style>
+            body {
+                display: flex;
+
+                justify-content: center;
+                background: #202020;
+                margin: 0;
+            }
+            canvas {
+                border: 1px solid #fff;
+                border-left: none;
+                border-right: none;
+                image-rendering: pixelated;     /* maybe only supported on Chrome? */
+                height: 100%;
+                width: 80%;
+            }
+        </style>
 </head>
 <body>
-    <canvas id='pong' width='1000' height='800'/>
+    <canvas id='pong' width='600' height='400'/>
     <script src='pong.js'></script>
 </body>
 </html>
