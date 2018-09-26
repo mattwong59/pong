@@ -75,7 +75,7 @@ class Pong {
         };
         callback();
 
-        this.CHAR_PIXEL = 10;
+        this.CHAR_PIXEL = 20;
         this.CHARS = [
             '111101101101111', 
             '010010010010010',
