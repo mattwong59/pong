@@ -92,7 +92,7 @@ class Pong {
             canvas.height = this.CHAR_PIXEL * 5;
             canvas.width = this.CHAR_PIXEL * 3;
             const context = canvas.getContext('2d');
-            context.fillStyle = '#fff';
+            context.fillStyle = '#f2ea4d';
             str.split('').forEach((fill, i) => {
                 if (fill === '1') {
                     context.fillRect(
@@ -131,7 +131,7 @@ class Pong {
     }
 
     drawRect(rect) {
-        this._context.fillStyle = '#FFF';
+        this._context.fillStyle = '#42f4b6';
         this._context.fillRect(rect.left, rect.top, 
                                rect.size.x, rect.size.y);     //draws the ball
     }
